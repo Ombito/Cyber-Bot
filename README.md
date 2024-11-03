@@ -79,7 +79,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For questions or feedback, feel free to reach out:
 
-
 ---
 
-Thank you for using our Cyber Bot! We hope it brings joy and utility to your server!
+
+Thank you for using our Cyber Bot. We hope it brings joy and utility to your server!
