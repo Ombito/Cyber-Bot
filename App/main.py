@@ -1,19 +1,51 @@
 import discord
 import os
+from discord.ext import commands
+import random
 
 
-client = discord.Client()
+intents = discord.Intents.default()
+intents.messages = True
 
-@client.event
+bot = commands.Bot(command_prefix='$', intents=intents)
+
+
+@bot.event
 async def on_ready():
-    print(f'Logged in as {client.user}')
+    print(f'Logged in as {bot.user}')
 
-@client.event
+@bot.event
 async def on_message(message):
-    if message.author == client.user:
+    if message.author == bot.user:
         return
     
-    if message.content.startswith('$hello'):
-        await message.channel.send('Hello')
+    await bot.process_commands(message)
 
-client.run(os.getenv('TOKEN'))
+
+@bot.command(name='hello')
+async def hello(ctx):
+    await ctx.send('Hello!')
+
+@bot.command(name='ping')
+async def ping(ctx):
+    await ctx.send('Pong!')
+
+
+@bot.command(name='info')
+async def info(ctx):
+    info_message = (
+        "I'm a simple Discord bot created to assist you!\n"
+        "Here are some commands you can use:\n"
+        "$hello - Greet me!\n"
+        "$ping - Check if I'm alive!\n"
+        "$info - Learn more about me."
+    )
+    await ctx.send(info_message)
+
+
+TOKEN = os.getenv('TOKEN')
+if TOKEN is None:
+    raise ValueError("No TOKEN found in environment variables.")
+    
+bot.run(TOKEN)
+
