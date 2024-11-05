@@ -69,22 +69,6 @@ async def ask(ctx, *, question: str = None):
         await ctx.send("Sorry, I couldn't process your request.")
 
 
-# @bot.command(name='ask')
-# async def ask(ctx, *, question: str = None):
-#     if question is None:
-#         await ctx.send("Please provide a question after the command. Usage: `$ask <your question>`")
-#         return
-#     try:
-#         response = openai.ChatCompletion.create(
-#             model="gpt-4",
-#             messages=[{"role": "user", "content": question}]
-#         )
-#         answer = response['choices'][0]['message']['content']
-#         await ctx.send(answer)
-#     except Exception as e:
-#         await ctx.send(f"Sorry, I couldn't process your request")
-
-
 
 TOKEN = os.getenv('TOKEN')
 if TOKEN is None:
