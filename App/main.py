@@ -14,6 +14,7 @@ bot = commands.Bot(command_prefix='$', intents=intents)
 
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
+
 @bot.event
 async def on_ready():
     print(f'Logged in as {bot.user}')
@@ -25,7 +26,7 @@ async def on_message(message):
     
     await bot.process_commands(message)
 
-    if any(word in message.content.lower() for word in ['badword1', 'badword2']):
+    if any(word in message.content.lower() for word in ['stupid', 'badword2']):
         await message.delete()
         await message.channel.send(f"{message.author.mention}, your message contained prohibited content and has been deleted.")
 
@@ -59,7 +60,7 @@ async def ask(ctx, *, question: str = None):
         return
     try:
         response = openai.ChatCompletion.create(
-            model="gpt-4",
+            model="gpt-4o",
             messages=[{"role": "user", "content": question}]
         )
         answer = response['choices'][0]['message']['content']
